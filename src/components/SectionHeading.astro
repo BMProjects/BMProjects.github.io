@@ -18,19 +18,19 @@ const withBase = (path: string) => {
 };
 ---
 
-<div class="relative mb-6 text-center" id={id}>
-  <div class="mx-auto">
+<div class="flex items-end justify-between gap-4 mb-6" id={id}>
+  <div>
     {kicker && <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-1">{kicker}</div>}
     <h2 class="text-xl md:text-2xl font-semibold text-stone-900 dark:text-stone-100">{title}</h2>
   </div>
   {href && (
-    <a href={withBase(href)} class="mt-3 inline-block text-sm text-stone-500 dark:text-stone-400 hover:text-accent dark:hover:text-accent-d no-underline whitespace-nowrap md:absolute md:right-0 md:top-1 md:mt-0">{hrefLabel ?? 'See all →'}</a>
+    <a href={withBase(href)} class="text-sm text-stone-500 dark:text-stone-400 hover:text-accent dark:hover:text-accent-d no-underline whitespace-nowrap">{hrefLabel ?? 'See all →'}</a>
   )}
   {actionId && (
     <button
       id={actionId}
       type="button"
-      class="mt-3 text-sm text-stone-500 dark:text-stone-400 hover:text-accent dark:hover:text-accent-d whitespace-nowrap md:absolute md:right-0 md:top-1 md:mt-0"
+      class="text-sm text-stone-500 dark:text-stone-400 hover:text-accent dark:hover:text-accent-d whitespace-nowrap"
     >
       {actionLabel ?? 'Show all'}
     </button>
