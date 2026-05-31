@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MetricsBanner from '../components/MetricsBanner.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import PublicationYearGroup from '../components/PublicationYearGroup.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -38,6 +39,28 @@ const grants = (await getCollection('grants')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 
+const selectedWorkKeywords: Record<string, string[]> = {
+  'medical-metrology': ['Dark-field inspection', 'OCT metrology', 'Atomic-position analysis'],
+  'hci-vision': ['Eye tracking', 'Pose comparison', 'Gaze estimation', 'Visual similarity'],
+  'green-ml': ['Forecasting', 'Fault diagnosis', 'Dynamic graph ensemble'],
+  'cs-education': ['LLM grading', 'MSc supervision', 'Course labs', 'Project mentoring'],
+};
+
+const courseAbbreviations: Record<string, string> = {
+  'Applied Human-Computer Interaction': 'HCI',
+  'Digital Image Processing': 'DIP',
+  'Computer Organization and Design': 'COD',
+  'C Programming': 'C',
+  'Python Programming': 'Python',
+  'Computer Frontier Topics': 'Frontiers',
+};
+
+const fundingAbbreviation = (item: string) => {
+  if (item.includes('National Key R&D Program')) return 'Nat. Key R&D';
+  if (item.includes('Zhejiang Natural Science Foundation')) return 'ZJ NSF';
+  return 'Grant';
+};
+
 ---
 
 <BaseLayout>
@@ -58,6 +81,8 @@ const grants = (await getCollection('grants')).sort(
         work with a real instrument, a real dataset, and a prototype that people
         can actually run.
       </p>
+
+      <MetricsBanner />
 
       <div class="mt-7 max-w-4xl">
         <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Bio</div>
@@ -100,7 +125,7 @@ const grants = (await getCollection('grants')).sort(
 
             <div class:list={[
               'grid grid-cols-1 gap-6 items-start',
-              hasProjectItems ? 'md:grid-cols-[1fr_18rem]' : 'md:grid-cols-[minmax(0,1fr)]',
+              hasProjectItems ? 'xl:grid-cols-[minmax(0,1fr)_16rem]' : 'grid-cols-[minmax(0,1fr)]',
             ]}>
               {hasProjectItems && (
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -116,25 +141,47 @@ const grants = (await getCollection('grants')).sort(
               </div>
               )}
 
-              <div class="space-y-5 text-sm">
-                <div>
+              <div class="research-side-meta grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-1 gap-4 xl:gap-5 text-sm">
+                <div class="min-w-0">
                   <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Selected Work</div>
-                  <ul class="space-y-2 text-stone-700 dark:text-stone-300">
-                    {area.evidence.map((item) => <li class="border-l border-sky-300 dark:border-sky-800 pl-3">{item}</li>)}
-                  </ul>
+                  <div class="flex flex-wrap gap-2">
+                    {(selectedWorkKeywords[area.key] ?? area.evidence).map((item) => (
+                      <span class="rounded-full border border-sky-200 dark:border-sky-900 bg-white dark:bg-stone-900 px-2.5 py-1 text-xs text-stone-700 dark:text-stone-300">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 {area.grants.length > 0 && (
-                  <div>
+                  <a
+                    href="#grants"
+                    class="block min-w-0 rounded-lg border border-transparent hover:border-stone-200 dark:hover:border-stone-800 px-0 py-0 no-underline"
+                  >
                     <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Funding</div>
-                    <ul class="space-y-2 text-stone-700 dark:text-stone-300">
-                      {area.grants.map((item) => <li>{item}</li>)}
-                    </ul>
-                  </div>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                      {area.grants.map((item) => (
+                        <span class="rounded-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1 text-stone-700 dark:text-stone-300">
+                          {fundingAbbreviation(item)}
+                        </span>
+                      ))}
+                    </div>
+                  </a>
                 )}
-                <div>
-                  <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Courses</div>
-                  <div class="text-stone-700 dark:text-stone-300">{area.courses.join(' · ')}</div>
-                </div>
+                {area.courses.length > 0 && (
+                  <a
+                    href="#teaching"
+                    class="block min-w-0 rounded-lg border border-transparent hover:border-stone-200 dark:hover:border-stone-800 px-0 py-0 no-underline"
+                  >
+                    <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Courses</div>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                      {area.courses.map((course) => (
+                        <span class="rounded-full bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 px-2.5 py-1 text-stone-700 dark:text-stone-300">
+                          {courseAbbreviations[course] ?? course}
+                        </span>
+                      ))}
+                    </div>
+                  </a>
+                )}
               </div>
             </div>
           </section>
@@ -156,7 +203,11 @@ const grants = (await getCollection('grants')).sort(
         aria-expanded="false"
       >
         {previewPublicationGroups.map((group, index) => (
-          <PublicationYearGroup year={group.year} items={group.items} first={index === 0} />
+          <PublicationYearGroup
+            year={group.year}
+            items={group.items}
+            first={index === 0}
+          />
         ))}
         <div
           class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-stone-50/0 to-stone-50 dark:from-stone-950/0 dark:to-stone-950"
@@ -187,7 +238,11 @@ const grants = (await getCollection('grants')).sort(
           </div>
           <div class="max-h-[calc(92vh-4.75rem)] overflow-y-auto px-5 sm:px-7 py-6">
             {publicationGroups.map((group, index) => (
-              <PublicationYearGroup year={group.year} items={group.items} first={index === 0} />
+              <PublicationYearGroup
+                year={group.year}
+                items={group.items}
+                first={index === 0}
+              />
             ))}
           </div>
         </div>

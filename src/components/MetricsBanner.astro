@@ -1,0 +1,18 @@
+---
+const metrics = [
+  { value: '28', label: 'publications' },
+  { value: '19+', label: 'MSc students supervised' },
+  { value: '3', label: 'funded research lines' },
+  { value: '10+', label: 'open-source tools' },
+  { value: '1', label: 'invention patent' },
+];
+---
+
+<dl class="mt-7 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl">
+  {metrics.map((item) => (
+    <div class="rounded-lg border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 px-4 py-3">
+      <dt class="text-2xl font-semibold text-stone-900 dark:text-stone-100">{item.value}</dt>
+      <dd class="mt-0.5 text-xs uppercase tracking-wide text-stone-500 dark:text-stone-400">{item.label}</dd>
+    </div>
+  ))}
+</dl>
