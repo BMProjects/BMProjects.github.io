@@ -1,0 +1,184 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { bioTimeline, courses, researchDirections, supervisionHighlights } from '../data/profile';
+
+const allPubs = await getCollection('publications');
+const featuredPubs = allPubs
+  .filter((p) => p.data.featured)
+  .sort((a, b) => b.data.year - a.data.year);
+
+const allProjects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const projectByName = new Map(allProjects.map((p) => [p.data.name, p]));
+const localProjectDescriptions: Record<string, string> = {
+  'Fashion Similarity Detection Tool':
+    'Clothing-target detection and visual similarity retrieval from e-commerce screenshots for apparel-brand monitoring and review.',
+};
+
+const grants = (await getCollection('grants')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+---
+
+<BaseLayout>
+  {/* ---------- About ---------- */}
+  <section id="about" class="bg-stone-50 dark:bg-stone-950">
+    <div class="container-prose py-14 md:py-20">
+      <div class="text-xs uppercase tracking-widest text-accent dark:text-accent-d mb-3">
+        Lecturer · China Jiliang University
+      </div>
+      <h1 class="text-4xl md:text-5xl font-semibold leading-tight">Xiang Ma</h1>
+
+      <p class="mt-6 leading-relaxed text-stone-800 dark:text-stone-200">
+        I am a lecturer in Computer Science at China Jiliang University. I build
+        measurement and learning systems across
+        <strong>medical and optical metrology</strong>,
+        <strong>human-computer interaction</strong>, and
+        <strong>machine learning for energy and quality systems</strong>. I like
+        work with a real instrument, a real dataset, and a prototype that people
+        can actually run.
+      </p>
+
+      <div class="mt-7">
+        <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Bio</div>
+        <ol class="space-y-2">
+          {bioTimeline.map((item) => (
+            <li class="grid grid-cols-[5.5rem_1fr] gap-3 text-sm text-stone-800 dark:text-stone-200">
+              <span class="font-mono text-xs text-stone-500 dark:text-stone-400 pt-0.5">{item.period}</span>
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="mt-7 text-sm text-stone-600 dark:text-stone-400 flex flex-wrap gap-x-6 gap-y-2">
+        <span><span class="text-stone-400 dark:text-stone-500">Email · </span><a href="mailto:maxiang@cjlu.edu.cn">maxiang@cjlu.edu.cn</a></span>
+        <span><span class="text-stone-400 dark:text-stone-500">GitHub · </span><a href="https://github.com/BMProjects">BMProjects</a></span>
+        <span><span class="text-stone-400 dark:text-stone-500">LinkedIn · </span><a href="https://www.linkedin.com/in/xiang-ma-05ab2b318">xiang-ma</a></span>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- Research + Projects (merged) ---------- */}
+  <section id="research" class="bg-sky-50/60 dark:bg-sky-950/20 border-y border-sky-100 dark:border-sky-950/40">
+    <div class="container-wide py-14 md:py-20">
+      <SectionHeading kicker="Research" title="Work by Direction" />
+
+      {researchDirections.map((area) => {
+        const items = area.projects
+          .flatMap((name) => {
+            const project = projectByName.get(name);
+            return project ? [project] : [];
+          });
+        const externalItems = area.projects.filter((name) => !projectByName.has(name));
+        const hasProjectItems = items.length > 0 || externalItems.length > 0;
+        return (
+          <section class="mb-14 last:mb-0">
+            <h3 class="font-serif text-xl md:text-2xl font-semibold text-stone-900 dark:text-stone-100">{area.title}</h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1 mb-5 max-w-3xl">{area.summary}</p>
+
+            <div class:list={[
+              'grid grid-cols-1 gap-6 items-start',
+              hasProjectItems ? 'md:grid-cols-[1fr_18rem]' : 'md:grid-cols-[minmax(0,1fr)]',
+            ]}>
+              {hasProjectItems && (
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {items.map((p) => <ProjectCard {...p.data} />)}
+                {externalItems.map((name) => (
+                  <div class="rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 p-4">
+                    <h4 class="font-serif text-lg font-semibold">{name}</h4>
+                    <p class="text-sm text-stone-600 dark:text-stone-300 mt-1.5">
+                      {localProjectDescriptions[name] ?? 'Applied software or supervised project recorded in local project materials.'}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              )}
+
+              <div class="space-y-5 text-sm">
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Selected Work</div>
+                  <ul class="space-y-2 text-stone-700 dark:text-stone-300">
+                    {area.evidence.map((item) => <li class="border-l border-sky-300 dark:border-sky-800 pl-3">{item}</li>)}
+                  </ul>
+                </div>
+                {area.grants.length > 0 && (
+                  <div>
+                    <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Funding</div>
+                    <ul class="space-y-2 text-stone-700 dark:text-stone-300">
+                      {area.grants.map((item) => <li>{item}</li>)}
+                    </ul>
+                  </div>
+                )}
+                <div>
+                  <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Courses</div>
+                  <div class="text-stone-700 dark:text-stone-300">{area.courses.join(' · ')}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </section>
+
+  {/* ---------- Selected Publications ---------- */}
+  <section id="publications" class="bg-stone-50 dark:bg-stone-950">
+    <div class="container-prose py-14 md:py-20">
+      <SectionHeading kicker="Selected" title="Publications" href="/publications" hrefLabel="All publications →" />
+      <ol>
+        {featuredPubs.map((p) => <PublicationItem {...p.data} />)}
+      </ol>
+    </div>
+  </section>
+
+  {/* ---------- Teaching ---------- */}
+  <section id="teaching" class="bg-amber-50/60 dark:bg-amber-950/15 border-y border-amber-100 dark:border-amber-950/40">
+    <div class="container-wide py-14 md:py-20">
+      <SectionHeading kicker="Courses & Supervision" title="Teaching" />
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 divide-y md:divide-y-0 divide-amber-200/60 dark:divide-amber-900/40">
+        {courses.map((c) => (
+          <li class="py-3 text-stone-800 dark:text-stone-200 border-b border-amber-200/60 dark:border-amber-900/40">
+            <div class="flex justify-between gap-4">
+              <span class="font-medium">{c.name}</span>
+              <span class="text-sm text-stone-500 dark:text-stone-400 shrink-0">{c.years}</span>
+            </div>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">{c.features}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-stone-700 dark:text-stone-300">
+        {supervisionHighlights.map((item) => (
+          <div class="border-t border-amber-300 dark:border-amber-800 pt-3">{item}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ---------- Grants ---------- */}
+  <section id="grants" class="bg-emerald-50/60 dark:bg-emerald-950/15">
+    <div class="container-prose py-14 md:py-20">
+      <SectionHeading kicker="Funding" title="Research Grants" />
+      <ul class="space-y-5">
+        {grants.map((g) => (
+          <li>
+            <div class="text-stone-900 dark:text-stone-100">{g.data.title}</div>
+            <div class="text-sm text-stone-500 dark:text-stone-400 mt-0.5">
+              {g.data.funder} · {g.data.amount} · {g.data.role} · {g.data.start} – {g.data.end}
+              {g.data.status && <> · {g.data.status}</>}
+            </div>
+            {g.data.description && (
+              <p class="text-sm text-stone-700 dark:text-stone-300 mt-1.5">{g.data.description}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

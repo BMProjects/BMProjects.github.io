@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const areaLabels: Record<string, string> = {
+  hci: 'Human-Computer Interaction & Visual Recognition',
+  biomedical: 'Medical and Optical Metrology',
+  'green-ml': 'Machine Learning for the Green Economy',
+  metrology: 'Microscopy and Materials Metrology',
+};
+const order = ['hci', 'biomedical', 'green-ml', 'metrology'];
+---
+
+<BaseLayout title="Projects — Xiang Ma">
+  <section class="bg-sky-50/60 dark:bg-sky-950/20">
+    <div class="container-wide py-14 md:py-20">
+      <h1 class="text-3xl md:text-4xl font-semibold">Projects</h1>
+      <p class="text-stone-600 dark:text-stone-400 mt-3 max-w-2xl">
+        Open-source code from <a href="https://github.com/BMProjects">github.com/BMProjects</a>,
+        organised by research direction.
+      </p>
+
+      {order.map((key) => {
+        const items = projects.filter((p) => p.data.area === key);
+        if (items.length === 0) return null;
+        return (
+          <div class="mt-10">
+            <h2 class="font-serif text-xl md:text-2xl font-semibold mb-5">{areaLabels[key]}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {items.map((p) => <ProjectCard {...p.data} />)}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

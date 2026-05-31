@@ -1,0 +1,57 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Xiang Ma — Lecturer in Computer Science',
+  description = 'Personal homepage of Xiang Ma — Lecturer in Computer Science, researcher in medical metrology, HCI, visual recognition, and machine learning.',
+} = Astro.props;
+const withBase = (path: string) => {
+  if (!path.startsWith('/')) return path;
+  const base = import.meta.env.BASE_URL;
+  if (path === '/') return `${base}${base.endsWith('/') ? '' : '/'}`;
+  const rest = path === '/' ? '' : path.slice(1);
+  return `${base}${base.endsWith('/') || !rest ? '' : '/'}${rest}`;
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+    <script is:inline>
+      (() => {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (stored === 'dark' || (!stored && prefersDark)) {
+            document.documentElement.classList.add('dark');
+          }
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

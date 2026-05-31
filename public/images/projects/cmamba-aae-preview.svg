@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">CMamba-AAE preview</title>
+  <desc id="desc">A labelled chiller signal enters convolution, Mamba sequence blocks, an adversarial latent space, and generated fault samples.</desc>
+  <rect width="960" height="540" fill="#f7f7f2"/>
+  <rect x="48" y="58" width="864" height="424" rx="24" fill="#ffffff" stroke="#d8d6cc"/>
+  <text x="84" y="108" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#2f332d">CMamba-AAE</text>
+  <text x="84" y="138" font-family="Inter, Arial, sans-serif" font-size="14" fill="#6d7168">conditional generation for labelled chiller fault signals</text>
+
+  <g transform="translate(82 180)">
+    <rect width="170" height="158" rx="14" fill="#eef7f0" stroke="#8fb79a"/>
+    <text x="22" y="35" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#2e5b3d">input</text>
+    <text x="22" y="58" font-family="Inter, Arial, sans-serif" font-size="12" fill="#4d6b55">65-dim sensor vector</text>
+    <polyline points="22,112 42,90 62,118 82,78 102,105 122,72 145,112" fill="none" stroke="#2f8a55" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="22" y="124" width="55" height="20" rx="10" fill="#d8eadc"/>
+    <text x="34" y="139" font-family="Inter, Arial, sans-serif" font-size="11" fill="#34533c">label</text>
+  </g>
+
+  <g transform="translate(308 174)">
+    <rect width="138" height="172" rx="16" fill="#eef3fb" stroke="#94a9ce"/>
+    <text x="27" y="38" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#2b4e82">Conv1D</text>
+    <rect x="28" y="70" width="82" height="14" rx="7" fill="#7b9ccf"/>
+    <rect x="28" y="98" width="82" height="14" rx="7" fill="#557ebb"/>
+    <rect x="28" y="126" width="82" height="14" rx="7" fill="#315f9b"/>
+  </g>
+
+  <g transform="translate(508 174)">
+    <rect width="138" height="172" rx="16" fill="#fbf3df" stroke="#d4ad5f"/>
+    <text x="29" y="38" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#816019">Mamba</text>
+    <path d="M32 80 C58 54 83 105 110 78" fill="none" stroke="#b37a15" stroke-width="5" stroke-linecap="round"/>
+    <path d="M32 116 C58 90 83 141 110 114" fill="none" stroke="#d19a2a" stroke-width="5" stroke-linecap="round"/>
+    <path d="M32 142 C58 116 83 167 110 140" fill="none" stroke="#e5bd63" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(704 174)">
+    <rect width="156" height="172" rx="16" fill="#f8eff4" stroke="#c896ae"/>
+    <text x="28" y="38" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#7b3d59">latent z</text>
+    <circle cx="52" cy="94" r="11" fill="#a85e82"/>
+    <circle cx="88" cy="76" r="11" fill="#d182a3"/>
+    <circle cx="96" cy="124" r="11" fill="#8d4d70"/>
+    <circle cx="122" cy="98" r="11" fill="#c26d91"/>
+    <text x="28" y="152" font-family="Inter, Arial, sans-serif" font-size="12" fill="#7b3d59">adversarial filter</text>
+  </g>
+
+  <g fill="none" stroke="#72766d" stroke-width="4" stroke-linecap="round">
+    <path d="M260 260 H294"/>
+    <path d="M454 260 H492"/>
+    <path d="M654 260 H690"/>
+  </g>
+  <g fill="#72766d">
+    <path d="M294 260 l-10 -7 v14z"/>
+    <path d="M492 260 l-10 -7 v14z"/>
+    <path d="M690 260 l-10 -7 v14z"/>
+  </g>
+
+  <rect x="258" y="390" width="444" height="50" rx="25" fill="#f0eee6" stroke="#d8d6cc"/>
+  <text x="318" y="421" font-family="Inter, Arial, sans-serif" font-size="16" fill="#4e514a">generate balanced synthetic fault samples</text>
+</svg>

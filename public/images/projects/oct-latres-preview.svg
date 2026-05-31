@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">OCT_LatRes preview</title>
+  <desc id="desc">An OCT B-scan analysis panel showing bead detection, profile extraction, and FWHM measurement.</desc>
+  <rect width="960" height="540" fill="#f7faf9"/>
+  <rect x="50" y="54" width="860" height="432" rx="24" fill="#ffffff" stroke="#d7e2df"/>
+  <text x="84" y="108" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#243735">OCT lateral resolution</text>
+  <text x="84" y="137" font-family="Inter, Arial, sans-serif" font-size="14" fill="#63706e">B-scan ingestion, bead detection, profile extraction, and FWHM statistics</text>
+
+  <g transform="translate(86 184)">
+    <rect width="382" height="230" rx="16" fill="#10202c"/>
+    <path d="M0 168 C56 136 110 178 166 140 C226 100 284 148 382 92 L382 230 L0 230 Z" fill="#1a465c"/>
+    <path d="M0 190 C74 166 124 202 196 170 C254 144 318 172 382 134" fill="none" stroke="#6db2ca" stroke-width="5" opacity=".65"/>
+    <g fill="#e8f7ff" opacity=".92">
+      <circle cx="90" cy="132" r="7"/>
+      <circle cx="128" cy="154" r="6"/>
+      <circle cx="178" cy="120" r="7"/>
+      <circle cx="238" cy="150" r="6"/>
+      <circle cx="296" cy="116" r="8"/>
+    </g>
+    <g fill="none" stroke="#ffca5f" stroke-width="3">
+      <circle cx="90" cy="132" r="18"/>
+      <circle cx="178" cy="120" r="18"/>
+      <circle cx="296" cy="116" r="18"/>
+    </g>
+    <text x="22" y="34" font-family="Inter, Arial, sans-serif" font-size="14" fill="#c7d7df">16-bit B-scan preview</text>
+  </g>
+
+  <g transform="translate(526 184)">
+    <rect width="298" height="230" rx="16" fill="#f4f8f7" stroke="#c9d9d5"/>
+    <text x="24" y="38" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#2e4a47">FWHM profile</text>
+    <line x1="42" y1="178" x2="260" y2="178" stroke="#9da9a6" stroke-width="2"/>
+    <line x1="62" y1="196" x2="62" y2="64" stroke="#9da9a6" stroke-width="2"/>
+    <path d="M64 178 C92 177 108 164 122 120 C139 63 165 63 182 120 C197 163 218 176 258 178" fill="none" stroke="#21837a" stroke-width="6" stroke-linecap="round"/>
+    <line x1="112" y1="120" x2="192" y2="120" stroke="#d68032" stroke-width="4" stroke-dasharray="8 7"/>
+    <line x1="112" y1="104" x2="112" y2="136" stroke="#d68032" stroke-width="4"/>
+    <line x1="192" y1="104" x2="192" y2="136" stroke="#d68032" stroke-width="4"/>
+    <text x="124" y="99" font-family="Inter, Arial, sans-serif" font-size="13" fill="#a45f22">FWHM</text>
+    <rect x="24" y="202" width="170" height="16" rx="8" fill="#dcebe8"/>
+  </g>
+
+  <g fill="none" stroke="#6b7775" stroke-width="4" stroke-linecap="round">
+    <path d="M480 300 H512"/>
+  </g>
+  <path d="M512 300 l-10 -7 v14z" fill="#6b7775"/>
+</svg>
