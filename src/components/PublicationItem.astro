@@ -8,9 +8,8 @@ interface Props {
   pdf?: string;
   code?: string;
   correspondingAuthors?: string[];
-  showYear?: boolean;
 }
-const { title, authors, venue, year, doi, pdf, code, correspondingAuthors = [], showYear = true } = Astro.props;
+const { title, authors, venue, doi, pdf, code, correspondingAuthors = [] } = Astro.props;
 
 const authorList = authors.split(';').map((author) => author.trim()).filter(Boolean);
 const normalise = (value: string) => value.toLowerCase().replace(/[\s,.-]/g, '');
@@ -20,30 +19,32 @@ const isXiangMa = (author: string) => xiangMaNames.has(normalise(author));
 const isCorresponding = (author: string) => correspondingSet.has(normalise(author));
 ---
 
-<li class="py-3 border-b border-stone-200/70 dark:border-stone-800/70 last:border-0">
-  <div class="flex gap-3">
-    {showYear && <span class="shrink-0 w-12 text-xs font-mono text-stone-400 dark:text-stone-500 pt-1">{year}</span>}
-      <div class="flex-1">
-      <div class="text-stone-900 dark:text-stone-100 leading-snug">{title}</div>
-      <div class="text-sm text-stone-500 dark:text-stone-400 mt-1">
-        {authorList.map((author, index) => (
-          <>
-            <span class:list={[isXiangMa(author) && 'font-semibold text-stone-800 dark:text-stone-200']}>
-              {author}
-              {isCorresponding(author) && <sup class="ml-0.5">*</sup>}
-            </span>
-            {index < authorList.length - 1 && <span>; </span>}
-          </>
-        ))}
-      </div>
-      <div class="text-sm text-stone-500 dark:text-stone-400 italic">{venue}</div>
-      {(doi || pdf || code) && (
-        <div class="flex gap-3 mt-1.5 text-xs">
-          {doi && <a href={`https://doi.org/${doi}`} class="no-underline hover:underline">DOI</a>}
-          {pdf && <a href={pdf} class="no-underline hover:underline">PDF</a>}
-          {code && <a href={code} class="no-underline hover:underline">Code</a>}
-        </div>
-      )}
-    </div>
+<li class="py-3 first:pt-0 last:pb-0">
+  <div class="text-[0.96rem] sm:text-base text-stone-900 dark:text-stone-100 leading-snug">
+    {doi ? (
+      <a href={`https://doi.org/${doi}`} class="text-stone-900 dark:text-stone-100 hover:text-accent dark:hover:text-accent-d no-underline hover:underline">
+        {title}
+      </a>
+    ) : (
+      title
+    )}
   </div>
+  <div class="text-sm text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">
+    {authorList.map((author, index) => (
+      <>
+        <span class:list={[isXiangMa(author) && 'font-semibold text-stone-800 dark:text-stone-200']}>
+          {author}
+          {isCorresponding(author) && <sup class="ml-0.5">*</sup>}
+        </span>
+        {index < authorList.length - 1 && <span>; </span>}
+      </>
+    ))}
+  </div>
+  <div class="text-sm text-stone-500 dark:text-stone-400 italic leading-relaxed">{venue}</div>
+  {(pdf || code) && (
+    <div class="flex gap-3 mt-1.5 text-xs">
+      {pdf && <a href={pdf} class="no-underline hover:underline">PDF</a>}
+      {code && <a href={code} class="no-underline hover:underline">Code</a>}
+    </div>
+  )}
 </li>

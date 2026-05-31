@@ -1,0 +1,34 @@
+---
+import PublicationItem from './PublicationItem.astro';
+
+interface Props {
+  year: number;
+  items: Array<{
+    data: {
+      title: string;
+      authors: string;
+      venue: string;
+      year: number;
+      doi?: string;
+      pdf?: string;
+      code?: string;
+      correspondingAuthors?: string[];
+    };
+  }>;
+  first?: boolean;
+}
+
+const { year, items, first = false } = Astro.props;
+---
+
+<section
+  class:list={[
+    'grid grid-cols-[3.5rem_minmax(0,1fr)] sm:grid-cols-[4.5rem_minmax(0,1fr)] gap-3 sm:gap-6 py-5 border-t border-dashed border-stone-200 dark:border-stone-800',
+    first && 'border-t-0 pt-0',
+  ]}
+>
+  <h3 class="text-sm font-medium text-stone-500 dark:text-stone-400 pt-0.5">{year}</h3>
+  <ol class="divide-y divide-stone-200/70 dark:divide-stone-800/70">
+    {items.map((p) => <PublicationItem {...p.data} />)}
+  </ol>
+</section>

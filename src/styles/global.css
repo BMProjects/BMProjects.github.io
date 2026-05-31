@@ -11,7 +11,7 @@
     @apply dark:bg-stone-950 dark:text-stone-100;
   }
   h1, h2, h3, h4 {
-    @apply font-serif tracking-tight;
+    @apply font-sans tracking-normal;
   }
   a {
     @apply text-accent hover:text-accent-hover underline-offset-2;
@@ -33,10 +33,10 @@
 @layer components {
   .container-prose {
     @apply mx-auto w-full px-5 sm:px-8;
-    max-width: min(46rem, 100%);
+    max-width: min(58rem, 100%);
   }
   .container-wide {
     @apply mx-auto w-full px-5 sm:px-8;
-    max-width: min(64rem, 100%);
+    max-width: min(86rem, 100%);
   }
 }

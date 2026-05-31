@@ -10,7 +10,7 @@ const withBase = (path: string) => {
 const links = [
   { href: '/#about', label: 'About' },
   { href: '/#research', label: 'Research' },
-  { href: '/publications', label: 'Publications' },
+  { href: '/#publications', label: 'Publications' },
   { href: '/#teaching', label: 'Teaching' },
   { href: '/#grants', label: 'Grants' },
 ];
@@ -18,7 +18,7 @@ const links = [
 
 <header class="border-b border-stone-200 dark:border-stone-800 bg-stone-50/85 dark:bg-stone-950/85 backdrop-blur sticky top-0 z-20">
   <div class="container-wide py-3.5 flex items-center justify-between">
-    <a href={withBase('/')} class="font-serif text-lg font-semibold text-stone-900 dark:text-stone-100 no-underline hover:no-underline">
+    <a href={withBase('/')} class="text-lg font-semibold text-stone-900 dark:text-stone-100 no-underline hover:no-underline">
       Xiang Ma
     </a>
     <div class="flex items-center">

@@ -21,7 +21,7 @@ const imageSrc = withBase(image ?? fallback);
 
 <a
   href={repo}
-  class="group flex flex-col rounded-xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 overflow-hidden hover:border-accent dark:hover:border-accent-d hover:shadow-md transition no-underline"
+  class="group flex flex-col rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 overflow-hidden hover:border-accent dark:hover:border-accent-d hover:shadow-md transition no-underline"
 >
   <div class="aspect-[16/9] w-full overflow-hidden bg-white dark:bg-stone-900">
     <img
@@ -33,7 +33,7 @@ const imageSrc = withBase(image ?? fallback);
   </div>
   <div class="p-4 flex-1 flex flex-col">
     <div class="flex items-center justify-between gap-2">
-      <h3 class="font-serif text-lg font-semibold text-stone-900 dark:text-stone-100 group-hover:text-accent dark:group-hover:text-accent-d">{name}</h3>
+      <h3 class="text-base font-semibold text-stone-900 dark:text-stone-100 group-hover:text-accent dark:group-hover:text-accent-d">{name}</h3>
       {language && <span class="text-xs text-stone-400 dark:text-stone-500 shrink-0">{language}</span>}
     </div>
     <p class="text-sm text-stone-600 dark:text-stone-300 mt-1.5 leading-snug flex-1">{description}</p>

@@ -2,14 +2,28 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import PublicationItem from '../components/PublicationItem.astro';
+import PublicationYearGroup from '../components/PublicationYearGroup.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { bioTimeline, courses, researchDirections, supervisionHighlights } from '../data/profile';
 
 const allPubs = await getCollection('publications');
-const featuredPubs = allPubs
-  .filter((p) => p.data.featured)
-  .sort((a, b) => b.data.year - a.data.year);
+const publications = allPubs.sort((a, b) => {
+  if (b.data.year !== a.data.year) return b.data.year - a.data.year;
+  return a.data.title.localeCompare(b.data.title);
+});
+const groupPublicationsByYear = (items: typeof publications) => {
+  const grouped = items.reduce<Record<number, typeof publications>>((acc, p) => {
+    (acc[p.data.year] ||= []).push(p);
+    return acc;
+  }, {});
+  return Object.keys(grouped)
+    .map(Number)
+    .sort((a, b) => b - a)
+    .map((year) => ({ year, items: grouped[year] }));
+};
+const previewPublications = publications.slice(0, 5);
+const previewPublicationGroups = groupPublicationsByYear(previewPublications);
+const publicationGroups = groupPublicationsByYear(publications);
 
 const allProjects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order,
@@ -29,13 +43,13 @@ const grants = (await getCollection('grants')).sort(
 <BaseLayout>
   {/* ---------- About ---------- */}
   <section id="about" class="bg-stone-50 dark:bg-stone-950">
-    <div class="container-prose py-14 md:py-20">
+    <div class="container-wide py-12 md:py-16">
       <div class="text-xs uppercase tracking-widest text-accent dark:text-accent-d mb-3">
         Lecturer · China Jiliang University
       </div>
-      <h1 class="text-4xl md:text-5xl font-semibold leading-tight">Xiang Ma</h1>
+      <h1 class="text-3xl md:text-4xl font-semibold leading-tight">Xiang Ma</h1>
 
-      <p class="mt-6 leading-relaxed text-stone-800 dark:text-stone-200">
+      <p class="mt-5 max-w-4xl leading-relaxed text-[0.98rem] sm:text-base text-stone-800 dark:text-stone-200">
         I am a lecturer in Computer Science at China Jiliang University. I build
         measurement and learning systems across
         <strong>medical and optical metrology</strong>,
@@ -45,7 +59,7 @@ const grants = (await getCollection('grants')).sort(
         can actually run.
       </p>
 
-      <div class="mt-7">
+      <div class="mt-7 max-w-4xl">
         <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Bio</div>
         <ol class="space-y-2">
           {bioTimeline.map((item) => (
@@ -67,7 +81,7 @@ const grants = (await getCollection('grants')).sort(
 
   {/* ---------- Research + Projects (merged) ---------- */}
   <section id="research" class="bg-sky-50/60 dark:bg-sky-950/20 border-y border-sky-100 dark:border-sky-950/40">
-    <div class="container-wide py-14 md:py-20">
+    <div class="container-wide py-12 md:py-16">
       <SectionHeading kicker="Research" title="Work by Direction" />
 
       {researchDirections.map((area) => {
@@ -80,8 +94,8 @@ const grants = (await getCollection('grants')).sort(
         const hasProjectItems = items.length > 0 || externalItems.length > 0;
         return (
           <section class="mb-14 last:mb-0">
-            <h3 class="font-serif text-xl md:text-2xl font-semibold text-stone-900 dark:text-stone-100">{area.title}</h3>
-            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1 mb-5 max-w-3xl">{area.summary}</p>
+            <h3 class="text-xl md:text-2xl font-semibold text-stone-900 dark:text-stone-100">{area.title}</h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400 mt-1 mb-5">{area.summary}</p>
 
             <div class:list={[
               'grid grid-cols-1 gap-6 items-start',
@@ -92,7 +106,7 @@ const grants = (await getCollection('grants')).sort(
                 {items.map((p) => <ProjectCard {...p.data} />)}
                 {externalItems.map((name) => (
                   <div class="rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 p-4">
-                    <h4 class="font-serif text-lg font-semibold">{name}</h4>
+                    <h4 class="text-lg font-semibold">{name}</h4>
                     <p class="text-sm text-stone-600 dark:text-stone-300 mt-1.5">
                       {localProjectDescriptions[name] ?? 'Applied software or supervised project recorded in local project materials.'}
                     </p>
@@ -128,19 +142,102 @@ const grants = (await getCollection('grants')).sort(
     </div>
   </section>
 
-  {/* ---------- Selected Publications ---------- */}
+  {/* ---------- Publications ---------- */}
   <section id="publications" class="bg-stone-50 dark:bg-stone-950">
-    <div class="container-prose py-14 md:py-20">
-      <SectionHeading kicker="Selected" title="Publications" href="/publications" hrefLabel="All publications →" />
-      <ol>
-        {featuredPubs.map((p) => <PublicationItem {...p.data} />)}
-      </ol>
+    <div class="container-wide py-12 md:py-16">
+      <SectionHeading kicker="Selected" title="Publications" />
+      <div
+        id="publication-preview"
+        class="relative cursor-pointer rounded-lg -mx-3 px-3 py-1 transition hover:bg-stone-100 dark:hover:bg-stone-900"
+        role="button"
+        tabindex="0"
+        aria-controls="publications-modal"
+        aria-expanded="false"
+      >
+        {previewPublicationGroups.map((group, index) => (
+          <PublicationYearGroup year={group.year} items={group.items} first={index === 0} />
+        ))}
+        <div
+          class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-stone-50/0 to-stone-50 dark:from-stone-950/0 dark:to-stone-950"
+          aria-hidden="true"
+        />
+      </div>
     </div>
+
+    <div id="publications-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-labelledby="publications-modal-title">
+      <button
+        id="publications-modal-backdrop"
+        type="button"
+        class="absolute inset-0 bg-stone-950/45 backdrop-blur-sm"
+        aria-label="Close publications"
+      ></button>
+      <div class="relative mx-auto flex min-h-full w-full max-w-5xl items-end sm:items-center justify-center px-0 sm:px-6 py-0 sm:py-8">
+        <div
+          id="publications-modal-panel"
+          class="relative max-h-[92vh] w-full cursor-pointer overflow-hidden rounded-t-lg sm:rounded-lg border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 shadow-2xl"
+          role="button"
+          tabindex="0"
+        >
+          <div class="sticky top-0 z-10 border-b border-stone-200 dark:border-stone-800 bg-stone-50/95 dark:bg-stone-950/95 px-5 sm:px-7 py-4 backdrop-blur">
+            <div>
+              <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400">All Publications</div>
+              <h3 id="publications-modal-title" class="text-lg font-semibold text-stone-900 dark:text-stone-100">Publications</h3>
+            </div>
+          </div>
+          <div class="max-h-[calc(92vh-4.75rem)] overflow-y-auto px-5 sm:px-7 py-6">
+            {publicationGroups.map((group, index) => (
+              <PublicationYearGroup year={group.year} items={group.items} first={index === 0} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const publicationPreview = document.querySelector('#publication-preview');
+      const modalBackdrop = document.querySelector('#publications-modal-backdrop');
+      const publicationsModal = document.querySelector('#publications-modal');
+      const publicationsModalPanel = document.querySelector('#publications-modal-panel');
+
+      const setModalOpen = (open) => {
+        if (!(publicationsModal instanceof HTMLElement)) return;
+        publicationsModal.classList.toggle('hidden', !open);
+        document.documentElement.classList.toggle('overflow-hidden', open);
+        publicationPreview?.setAttribute('aria-expanded', String(open));
+      };
+
+      publicationPreview?.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('a')) return;
+        setModalOpen(true);
+      });
+      publicationPreview?.addEventListener('keydown', (event) => {
+        if (!(event instanceof KeyboardEvent)) return;
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setModalOpen(true);
+        }
+      });
+      publicationsModalPanel?.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('a')) return;
+        setModalOpen(false);
+      });
+      publicationsModalPanel?.addEventListener('keydown', (event) => {
+        if (!(event instanceof KeyboardEvent)) return;
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          setModalOpen(false);
+        }
+      });
+      modalBackdrop?.addEventListener('click', () => setModalOpen(false));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setModalOpen(false);
+      });
+    </script>
   </section>
 
   {/* ---------- Teaching ---------- */}
   <section id="teaching" class="bg-amber-50/60 dark:bg-amber-950/15 border-y border-amber-100 dark:border-amber-950/40">
-    <div class="container-wide py-14 md:py-20">
+    <div class="container-wide py-12 md:py-16">
       <SectionHeading kicker="Courses & Supervision" title="Teaching" />
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 divide-y md:divide-y-0 divide-amber-200/60 dark:divide-amber-900/40">
         {courses.map((c) => (
@@ -163,9 +260,9 @@ const grants = (await getCollection('grants')).sort(
 
   {/* ---------- Grants ---------- */}
   <section id="grants" class="bg-emerald-50/60 dark:bg-emerald-950/15">
-    <div class="container-prose py-14 md:py-20">
+    <div class="container-wide py-12 md:py-16">
       <SectionHeading kicker="Funding" title="Research Grants" />
-      <ul class="space-y-5">
+      <ul class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-5">
         {grants.map((g) => (
           <li>
             <div class="text-stone-900 dark:text-stone-100">{g.data.title}</div>
