@@ -61,16 +61,15 @@ This file keeps the researcher profile material in reusable form for future webs
 ## Sources Used Locally
 
 - `/mnt/Data/Dev/PersonalPage/Xiang_Ma_CV_PD10408_Lecturer_in_ComputerScience_22Nov2024.docx`
-- `/mnt/Data/CJLU/funding/Med_2024/2026中期/中期科技报告_离焦微结构镜片磨损程度检测及关键参数评估研究_0519.docx`
-- `/mnt/Data/CJLU/funding/404_2021/自评/附件3课题任务书（课题二）20220213.doc`
-- `/mnt/Data/CJLU/funding/404_2021/绩效评价/自测报告_典型应用场景下侵权假冒商品取证技术研究v3_mx.docx`
-- `/mnt/Data/CJLU/funding/NSFZJ_2019/项目验收材料.pdf`
-- `/mnt/Data/CJLU/funding/NSFZJ_2019/2023102667305-基于球结膜血管图像识别的眼动跟踪系统及其方法-发明专利证书.pdf`
+- 2026 midterm technical report for the defocus microstructure lens wear-detection project.
+- Task statement and self-evaluation materials for the 2021 digital-forensics project.
+- Final acceptance materials for the Zhejiang Natural Science Foundation project.
+- Invention patent certificate for the bulbar-conjunctival vascular image-based eye-tracking system.
 - `/mnt/Data/CJLU/lecture`
 - `/mnt/Data/CJLU/lecture/Graduate/2020`
 - `/mnt/Data/CJLU/lecture/Graduate/2021`
 - `/mnt/Data/CJLU/lecture/Graduate/2022`
-- `/mnt/Data/CJLU/lecture/Graduate/2023级夏季毕业答辩材料/计算机分组.xlsx`
+- 2023-cohort summer defense grouping materials.
 - `/mnt/Data/CJLU/lecture/Graduate/2024/list.xlsx`
-- `/mnt/Data/CJLU/lecture/Graduate/2025/信息工程学院2025年硕导招生资格及名额申请表.docx`
+- 2025 MSc-supervisor eligibility and quota application materials.
 - GitHub account: `https://github.com/BMProjects`

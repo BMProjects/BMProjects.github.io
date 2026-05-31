@@ -1,8 +1,7 @@
 ---
-title: "基于3D打印技术的眼科OCT设备计量校准装置研制"
-authors: "段亮成; 刘文丽; 秦晓雯; 崔涛; 李修宇; 赵峻邦; 马祥; 胡志雄"
-venue: "红外与激光工程, 51(8): 20210789"
+title: "Development of a Metrological Calibration Device for Ophthalmic OCT Equipment Based on 3D Printing Technology"
+authors: "Duan, Liangcheng; Liu, Wenli; Qin, Xiaowen; Cui, Tao; Li, Xiuyu; Zhao, Junbang; Ma, Xiang; Hu, Zhixiong"
+venue: "Infrared and Laser Engineering, 51(8): 20210789"
 year: 2022
 type: journal
 ---
-

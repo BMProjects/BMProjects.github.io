@@ -14,7 +14,7 @@ const { title, authors, venue, year, doi, pdf, code, correspondingAuthors = [], 
 
 const authorList = authors.split(';').map((author) => author.trim()).filter(Boolean);
 const normalise = (value: string) => value.toLowerCase().replace(/[\s,.-]/g, '');
-const xiangMaNames = new Set(['maxiang', 'xiangma', '马祥']);
+const xiangMaNames = new Set(['maxiang', 'xiangma']);
 const correspondingSet = new Set(correspondingAuthors.map(normalise));
 const isXiangMa = (author: string) => xiangMaNames.has(normalise(author));
 const isCorresponding = (author: string) => correspondingSet.has(normalise(author));

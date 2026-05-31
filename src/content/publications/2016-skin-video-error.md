@@ -1,9 +1,8 @@
 ---
-title: "人体皮肤彩色视频误差分析及一致性提高"
-authors: "闫勇刚; 邓小玲; 马祥; 欧阳健飞"
-venue: "红外与激光工程, 45(S1): 222"
+title: "Error Analysis and Consistency Improvement of Human Skin Color Video"
+authors: "Yan, Yonggang; Deng, Xiaoling; Ma, Xiang; Ouyang, Jianfei"
+venue: "Infrared and Laser Engineering, 45(S1): 222"
 year: 2016
 type: journal
 doi: "10.3788/IRLA201645.S126005"
 ---
-

@@ -49,7 +49,7 @@ export const researchDirections = [
   },
   {
     key: 'cs-education',
-    title: '大语言模型应用',
+    title: 'Large Language Model Applications',
     summary:
       'LLM-assisted grading, course laboratories, reading reports, and project supervision across systems, programming, HCI, and image processing.',
     projects: ['HCI-AutoGrader'],
