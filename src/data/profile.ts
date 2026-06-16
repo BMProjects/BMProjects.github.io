@@ -20,7 +20,7 @@ export const researchDirections = [
     title: 'Human-Computer Interaction and Visual Recognition',
     summary:
       'Eye tracking, visual similarity, pose analysis, and interaction devices that turn perception signals into usable interfaces.',
-    projects: ['DanceBattle', 'WaveGazeZoo', 'WDMPA-Net', 'Fashion Similarity Detection Tool'],
+    projects: ['BadmintonCoach', 'DanceBattle', 'WaveGazeZoo', 'WDMPA-Net', 'Fashion Similarity Detection Tool'],
     grants: [
       'Zhejiang Natural Science Foundation: conjunctival vascular layering and eye tracking',
       'National Key R&D Program: trademark and product similarity evidence collection',
