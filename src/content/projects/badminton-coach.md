@@ -5,6 +5,7 @@ description: Modular badminton match-video analysis system that extracts court, 
 area: hci
 tags: [Pose Estimation, Tracking, Sports Analytics]
 language: Python
+image: /images/projects/badminton-coach-demo.webp
 featured: true
 order: 7
 ---
