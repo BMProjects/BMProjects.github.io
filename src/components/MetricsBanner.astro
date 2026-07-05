@@ -8,11 +8,11 @@ const metrics = [
 ];
 ---
 
-<dl class="mt-7 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl">
+<dl class="mt-7 flex flex-wrap gap-2.5">
   {metrics.map((item) => (
-    <div class="rounded-lg border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 px-4 py-3">
-      <dt class="text-2xl font-semibold text-stone-900 dark:text-stone-100">{item.value}</dt>
-      <dd class="mt-0.5 text-xs uppercase tracking-wide text-stone-500 dark:text-stone-400">{item.label}</dd>
+    <div class="rounded-lg border border-stone-200 dark:border-stone-800 bg-white/70 dark:bg-stone-900/60 px-3 py-2.5 w-[8.5rem]">
+      <dt class="text-xl font-semibold text-stone-900 dark:text-stone-100">{item.value}</dt>
+      <dd class="mt-0.5 text-[0.7rem] uppercase tracking-wide leading-tight text-stone-500 dark:text-stone-400">{item.label}</dd>
     </div>
   ))}
 </dl>
