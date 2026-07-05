@@ -49,7 +49,7 @@ const selectedWorkKeywords: Record<string, string[]> = {
   'medical-metrology': ['Dark-field inspection', 'OCT metrology', 'Atomic-position analysis'],
   'hci-vision': ['Eye tracking', 'Pose comparison', 'Gaze estimation', 'Sports video analysis', 'Visual similarity'],
   'green-ml': ['Forecasting', 'Fault diagnosis', 'Dynamic graph ensemble'],
-  'cs-education': ['LLM grading', 'MSc supervision', 'Course labs', 'Project mentoring'],
+  'cs-education': ['LLM grading', 'Local-LLM automation', 'Dev tooling', 'MSc supervision', 'Project mentoring'],
 };
 
 const courseAbbreviations: Record<string, string> = {
@@ -73,15 +73,15 @@ const fundingAbbreviation = (item: string) => {
   {/* ---------- About ---------- */}
   <section id="about" class="bg-stone-50 dark:bg-stone-950">
     <div class="container-wide py-12 md:py-16">
-      <div class="flex flex-col sm:flex-row sm:items-start gap-6 md:gap-8">
+      <div class="flex flex-col md:flex-row md:items-start gap-6 md:gap-9">
         <img
-          src={withBase('/images/headshot.jpg')}
+          src={withBase('/images/halfbody.jpg')}
           alt="Portrait of Xiang Ma"
-          width="300"
-          height="420"
-          class="w-28 sm:w-36 h-auto shrink-0 rounded-lg border border-stone-200 dark:border-stone-800 shadow-sm"
+          width="700"
+          height="1199"
+          class="w-40 sm:w-48 md:w-56 h-auto shrink-0 self-center md:self-start rounded-lg border border-stone-200 dark:border-stone-800 shadow-sm"
         />
-        <div class="min-w-0">
+        <div class="min-w-0 flex-1">
           <div class="text-xs uppercase tracking-widest text-accent dark:text-accent-d mb-3">
             Lecturer · China Jiliang University
           </div>
@@ -96,10 +96,10 @@ const fundingAbbreviation = (item: string) => {
             work with a real instrument, a real dataset, and a prototype that people
             can actually run.
           </p>
+
+          <MetricsBanner />
         </div>
       </div>
-
-      <MetricsBanner />
 
       <div class="mt-7 max-w-4xl">
         <div class="text-xs uppercase tracking-widest text-stone-500 dark:text-stone-400 mb-2">Bio</div>

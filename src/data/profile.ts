@@ -20,7 +20,7 @@ export const researchDirections = [
     title: 'Human-Computer Interaction and Visual Recognition',
     summary:
       'Eye tracking, visual similarity, pose analysis, and interaction devices that turn perception signals into usable interfaces.',
-    projects: ['BadmintonCoach', 'DanceBattle', 'WaveGazeZoo', 'WDMPA-Net', 'Fashion Similarity Detection Tool'],
+    projects: ['BadmintonCoach', 'SoccerCoach', 'DanceBattle', 'WaveGazeZoo', 'WDMPA-Net', 'Fashion Similarity Detection Tool'],
     grants: [
       'Zhejiang Natural Science Foundation: conjunctival vascular layering and eye tracking',
       'National Key R&D Program: trademark and product similarity evidence collection',
@@ -51,8 +51,8 @@ export const researchDirections = [
     key: 'cs-education',
     title: 'Large Language Model Applications',
     summary:
-      'LLM-assisted grading, course laboratories, reading reports, and project supervision across systems, programming, HCI, and image processing.',
-    projects: ['HCI-AutoGrader'],
+      'LLM-assisted grading, local-LLM automation pipelines, developer tooling, and course laboratories across systems, programming, HCI, and image processing.',
+    projects: ['HCI-AutoGrader', 'AcadBridge', 'cswap-gui'],
     grants: [],
     courses: [
       'Computer Organization and Design',
