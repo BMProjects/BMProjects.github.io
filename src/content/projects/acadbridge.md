@@ -5,6 +5,7 @@ description: Self-hosted job-search pipeline for academic roles in Australia and
 area: hci
 tags: [LLM, Automation, FastAPI]
 language: Python
+image: /images/projects/acadbridge-preview.webp
 featured: true
 order: 9
 ---
