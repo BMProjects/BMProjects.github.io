@@ -52,7 +52,7 @@ export const researchDirections = [
     title: 'Large Language Model Applications',
     summary:
       'LLM-assisted grading, local-LLM automation pipelines, developer tooling, and course laboratories across systems, programming, HCI, and image processing.',
-    projects: ['HCI-AutoGrader', 'AcadBridge', 'cswap-gui'],
+    projects: ['LLM-AutoGrader', 'AcadBridge', 'cswap-gui'],
     grants: [],
     courses: [
       'Computer Organization and Design',
@@ -61,7 +61,7 @@ export const researchDirections = [
       'Applied Human-Computer Interaction',
     ],
     evidence: [
-      'LLM-assisted rubric grading for HCI assignments with roster import, multimodal review, gradebook statistics, and feedback export',
+      'LLM-assistant-driven flexible course grading: conversational import planning, streaming comparative rubric grading, and gradebook curve adjustment with CSV and annotated-PDF export',
       'Supervised 19 MSc students, including 13 graduated students and 6 students currently in training in 2026',
       'Class adviser for the 2024 full-time MSc cohort in Computer Science and Technology, 69 students',
       'Project-style supervision across OCT measurement, fashion similarity, pose analysis, and image segmentation',
