@@ -5,4 +5,5 @@ venue: "Optics in Health Care and Biomedical Optics XII, SPIE 12320: 290–293"
 year: 2022
 type: conference
 doi: "10.1117/12.2643956"
+featured: true
 ---

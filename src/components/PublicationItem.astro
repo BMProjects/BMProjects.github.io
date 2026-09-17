@@ -8,8 +8,10 @@ interface Props {
   pdf?: string;
   code?: string;
   correspondingAuthors?: string[];
+  showYear?: boolean;
+  showRole?: boolean;
 }
-const { title, authors, venue, doi, pdf, code, correspondingAuthors = [] } = Astro.props;
+const { title, authors, venue, year, doi, pdf, code, correspondingAuthors = [], showYear = false, showRole = false } = Astro.props;
 
 const authorList = authors.split(';').map((author) => author.trim()).filter(Boolean);
 const normalise = (value: string) => value.toLowerCase().replace(/[\s,.-]/g, '');
@@ -17,9 +19,14 @@ const xiangMaNames = new Set(['maxiang', 'xiangma']);
 const correspondingSet = new Set(correspondingAuthors.map(normalise));
 const isXiangMa = (author: string) => xiangMaNames.has(normalise(author));
 const isCorresponding = (author: string) => correspondingSet.has(normalise(author));
+const roles = [
+  authorList[0] && isXiangMa(authorList[0]) ? 'First author' : '',
+  authorList.some((author) => isXiangMa(author) && isCorresponding(author)) ? 'Corresponding author' : '',
+].filter(Boolean);
 ---
 
 <li class="py-3 first:pt-0 last:pb-0">
+  {(showYear || (showRole && roles.length > 0)) && <p class="text-xs text-stone-500 dark:text-stone-400 mb-1">{showYear && year}{showYear && showRole && roles.length > 0 && ' · '}{showRole && roles.join(' · ')}</p>}
   <div class="text-[0.96rem] sm:text-base text-stone-900 dark:text-stone-100 leading-snug">
     {doi ? (
       <a href={`https://doi.org/${doi}`} class="text-stone-900 dark:text-stone-100 hover:text-accent dark:hover:text-accent-d no-underline hover:underline">

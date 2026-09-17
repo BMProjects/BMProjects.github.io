@@ -16,9 +16,10 @@ interface Props {
     };
   }>;
   first?: boolean;
+  showRole?: boolean;
 }
 
-const { year, items, first = false } = Astro.props;
+const { year, items, first = false, showRole = false } = Astro.props;
 ---
 
 <section
@@ -29,6 +30,6 @@ const { year, items, first = false } = Astro.props;
 >
   <h3 class="text-sm font-medium text-stone-500 dark:text-stone-400 pt-0.5">{year}</h3>
   <ol class="divide-y divide-stone-200/70 dark:divide-stone-800/70">
-    {items.map((p) => <PublicationItem {...p.data} />)}
+    {items.map((p) => <PublicationItem {...p.data} showRole={showRole} />)}
   </ol>
 </section>

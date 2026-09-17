@@ -6,5 +6,4 @@ year: 2025
 type: journal
 doi: "10.1016/j.eswa.2025.128314"
 correspondingAuthors: ["Huang, Jing", "Ke, Yan"]
-featured: true
 ---

@@ -1,10 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
+const publications = await getCollection('publications');
+const projects = await getCollection('projects');
+const grants = await getCollection('grants');
 const metrics = [
-  { value: '28', label: 'publications' },
-  { value: '13+', label: 'open-source tools' },
-  { value: '19+', label: 'MSc students supervised' },
-  { value: '3', label: 'funded research lines' },
-  { value: '1', label: 'invention patent' },
+  { value: publications.filter((p) => p.data.type !== 'patent').length, label: 'papers' },
+  { value: projects.length, label: 'software repositories' },
+  { value: '19', label: 'MSc students supervised in total' },
+  { value: grants.length, label: 'funded projects' },
+  { value: publications.filter((p) => p.data.type === 'patent').length, label: 'patent' },
 ];
 ---
 

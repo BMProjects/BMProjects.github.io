@@ -5,5 +5,4 @@ venue: "Advanced Engineering Informatics, 51: 101442"
 year: 2022
 type: journal
 doi: "10.1016/j.aei.2021.101442"
-featured: true
 ---

@@ -5,5 +5,6 @@ const site = process.env.SITE_URL ?? 'https://bmprojects.github.io';
 
 export default defineConfig({
   site,
+  devToolbar: { enabled: false },
   integrations: [tailwind({ applyBaseStyles: false })],
 });

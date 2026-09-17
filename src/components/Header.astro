@@ -17,12 +17,12 @@ const links = [
 ---
 
 <header class="border-b border-stone-200 dark:border-stone-800 bg-stone-50/85 dark:bg-stone-950/85 backdrop-blur sticky top-0 z-20">
-  <div class="container-wide py-3.5 flex items-center justify-between">
+  <div class="container-wide py-3.5 flex flex-wrap items-center justify-between gap-y-2">
     <a href={withBase('/')} class="text-lg font-semibold text-stone-900 dark:text-stone-100 no-underline hover:no-underline">
       Xiang Ma
     </a>
-    <div class="flex items-center">
-      <nav class="hidden sm:flex gap-5 text-sm">
+    <div class="flex items-center header-controls">
+      <nav class="flex flex-wrap gap-x-5 gap-y-1 text-sm" aria-label="Main navigation">
         {links.map((l) => (
           <a href={withBase(l.href)} class="text-stone-600 dark:text-stone-400 hover:text-accent dark:hover:text-accent-d no-underline hover:no-underline">
             {l.label}

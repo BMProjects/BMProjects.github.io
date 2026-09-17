@@ -6,8 +6,9 @@ interface Props {
   tags?: string[];
   language?: string;
   image?: string;
+  imageCaption?: string;
 }
-const { name, repo, description, tags = [], language, image } = Astro.props;
+const { name, repo, description, tags = [], language, image, imageCaption } = Astro.props;
 const fallback = `/images/projects/_placeholder.svg`;
 const withBase = (path: string) => {
   if (!path.startsWith('/')) return path;
@@ -17,32 +18,41 @@ const withBase = (path: string) => {
   return `${base}${base.endsWith('/') || !rest ? '' : '/'}${rest}`;
 };
 const imageSrc = withBase(image ?? fallback);
+const shownTags = tags.slice(0, 3);
 ---
 
 <a
   href={repo}
-  class="group flex flex-col rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 overflow-hidden hover:border-accent dark:hover:border-accent-d hover:shadow-md transition no-underline"
+  class="group h-full min-w-0 flex flex-col rounded-lg border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 overflow-hidden hover:border-accent dark:hover:border-accent-d hover:shadow-md transition no-underline"
 >
-  <div class="aspect-[16/9] w-full overflow-hidden bg-white dark:bg-stone-900">
+  <div class="relative aspect-[16/9] w-full shrink-0 overflow-hidden bg-white dark:bg-stone-900">
     <img
       src={imageSrc}
-      alt={`${name} preview`}
+      alt={imageCaption ? `${name}: ${imageCaption}` : `${name} preview`}
       loading="lazy"
       class="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
     />
+    {/* Sits over the image so a caption never changes the card height. */}
+    {imageCaption && (
+      <p class="absolute inset-x-0 bottom-0 bg-white/85 dark:bg-stone-900/85 backdrop-blur-sm px-2.5 py-1 text-[0.68rem] leading-tight text-stone-500 dark:text-stone-400 line-clamp-1">
+        {imageCaption}
+      </p>
+    )}
   </div>
-  <div class="p-4 flex-1 flex flex-col">
-    <div class="flex items-center justify-between gap-2">
-      <h3 class="text-base font-semibold text-stone-900 dark:text-stone-100 group-hover:text-accent dark:group-hover:text-accent-d">{name}</h3>
+  <div class="p-4 flex-1 flex flex-col min-h-[10rem]">
+    <div class="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-1">
+      <h4 class="min-w-0 break-words text-base font-semibold text-stone-900 dark:text-stone-100 group-hover:text-accent dark:group-hover:text-accent-d">{name}</h4>
       {language && <span class="text-xs text-stone-400 dark:text-stone-500 shrink-0">{language}</span>}
     </div>
-    <p class="text-sm text-stone-600 dark:text-stone-300 mt-1.5 leading-snug flex-1">{description}</p>
-    {tags.length > 0 && (
-      <div class="flex flex-wrap gap-1.5 mt-3">
-        {tags.map((t) => (
-          <span class="text-xs px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">{t}</span>
-        ))}
-      </div>
-    )}
+    <p class="text-sm text-stone-600 dark:text-stone-300 mt-1.5 leading-snug line-clamp-4">{description}</p>
+    <div class="mt-auto pt-3">
+      {shownTags.length > 0 && (
+        <div class="flex flex-wrap gap-1.5">
+          {shownTags.map((t) => (
+            <span class="text-xs px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">{t}</span>
+          ))}
+        </div>
+      )}
+    </div>
   </div>
 </a>

@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-  title = 'Xiang Ma — Lecturer in Computer Science',
-  description = 'Personal homepage of Xiang Ma — Lecturer in Computer Science, researcher in medical metrology, HCI, visual recognition, and machine learning.',
+  title = 'Xiang Ma — Optical Measurement & Machine Learning',
+  description = 'Xiang Ma develops image analysis and machine learning methods for optical measurement and inspection, with a focus on ophthalmic lenses and OCT imaging.',
 } = Astro.props;
 const withBase = (path: string) => {
   if (!path.startsWith('/')) return path;
@@ -48,8 +48,9 @@ const withBase = (path: string) => {
     </script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <Header />
-    <main>
+    <main id="main-content" tabindex="-1">
       <slot />
     </main>
     <Footer />

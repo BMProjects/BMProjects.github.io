@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationItem from '../components/PublicationItem.astro';
+import { bioTimeline, courses, supervisionHighlights } from '../data/profile';
+const grants = (await getCollection('grants')).sort((a, b) => a.data.order - b.data.order);
+const publications = (await getCollection('publications')).filter(({ data }) => data.featured && data.type !== 'patent').sort((a, b) => b.data.year - a.data.year);
+---
+<BaseLayout title="Curriculum Vitae — Xiang Ma">
+  <article class="container-prose py-12 text-stone-800 dark:text-stone-200 leading-relaxed">
+    <div class="no-print flex flex-wrap items-center justify-between gap-4 mb-8">
+      <a href={import.meta.env.BASE_URL}>← Homepage</a>
+      <button type="button" id="print-cv" class="border border-stone-300 dark:border-stone-700 px-4 py-2 rounded text-sm">Print / Save PDF</button>
+    </div>
+    <h1 class="text-3xl font-semibold">Xiang Ma</h1>
+    <p class="mt-2">Lecturer in Computer Science · China Jiliang University</p>
+    <p class="text-sm text-stone-500 dark:text-stone-400 mt-2">Curriculum vitae · September 2026</p>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm mt-4 mb-8"><a href="mailto:brant.mar@gmail.com">brant.mar@gmail.com</a><a href="mailto:maxiang@cjlu.edu.cn">maxiang@cjlu.edu.cn</a><a href="https://github.com/BMProjects">GitHub</a></div>
+    <section class="py-7 border-t border-stone-200 dark:border-stone-800">
+      <h2 class="text-xl font-semibold mb-5">Research</h2>
+      <p>Optical measurement and image analysis, with a current focus on ophthalmic lens inspection and OCT metrology. Related work includes eye tracking, gaze estimation and machine learning for environmental and engineering systems.</p>
+    </section>
+    <section class="py-7 border-t border-stone-200 dark:border-stone-800">
+      <h2 class="text-xl font-semibold mb-5">Experience & education</h2>
+      <ol class="space-y-4">{bioTimeline.map((item) => <li class="cv-entry grid grid-cols-1 sm:grid-cols-[7rem_1fr] gap-1 sm:gap-5"><span class="text-sm text-stone-500 dark:text-stone-400">{item.period}</span><span>{item.text}</span></li>)}</ol>
+    </section>
+    <section class="py-7 border-t border-stone-200 dark:border-stone-800">
+      <h2 class="text-xl font-semibold mb-5">Research funding</h2>
+      <ul class="space-y-6">{grants.map(({ data }) => <li class="cv-entry"><h3 class="font-medium">{data.title}</h3><p class="text-sm text-stone-500 dark:text-stone-400 mt-2">{data.funder} · {data.start} – {data.end}</p><p class="text-sm mt-2">Role: {data.role}</p>{data.description && <p class="text-sm mt-2">{data.description}</p>}</li>)}</ul>
+    </section>
+    <section class="py-7 border-t border-stone-200 dark:border-stone-800">
+      <h2 class="text-xl font-semibold mb-5">Selected publications</h2>
+      <ol class="space-y-3">{publications.map(({ data }) => <PublicationItem {...data} showYear showRole />)}</ol>
+      <p class="text-xs text-stone-500 dark:text-stone-400 mt-4">* Corresponding author. Xiang Ma is shown in bold.</p>
+      <a href={`${import.meta.env.BASE_URL}#all-publications`} class="inline-block mt-4 text-sm">Full publication list</a>
+    </section>
+    <section class="py-7 border-t border-stone-200 dark:border-stone-800">
+      <h2 class="text-xl font-semibold mb-5">Teaching & supervision</h2>
+      <ul class="space-y-2">{courses.map((course) => <li>{course.name} <span class="text-sm text-stone-500 dark:text-stone-400">· {course.years}</span></li>)}</ul>
+      <ul class="space-y-3 mt-6 text-sm">{supervisionHighlights.map((item) => <li>{item}</li>)}</ul>
+    </section>
+  </article>
+</BaseLayout>
+<script>
+  document.getElementById('print-cv')?.addEventListener('click', () => window.print());
+</script>

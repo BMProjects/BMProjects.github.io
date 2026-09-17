@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+interface Props {
+  title: string;
+  summary: string;
+  projects: CollectionEntry<'projects'>[];
+}
+const { title, summary, projects } = Astro.props;
+---
+<section class="mb-12 last:mb-0">
+  <h3 class="text-xl md:text-2xl font-semibold text-stone-900 dark:text-stone-100">{title}</h3>
+  <p class="text-sm text-stone-600 dark:text-stone-400 mt-2 mb-5 max-w-4xl leading-relaxed">{summary}</p>
+  {/* One fixed track width for every group, so cards keep the same size across the page. */}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+    {projects.map(({ data }) => <ProjectCard {...data} />)}
+  </div>
+</section>

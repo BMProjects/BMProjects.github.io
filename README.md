@@ -17,7 +17,8 @@ nginx, PM2, cloud-server scripts, or generated `dist/` output.
 - `.github/workflows/deploy.yml`: GitHub Pages build and deploy workflow.
 - `src/pages/`: Astro pages.
 - `src/components/`: shared page components.
-- `src/data/profile.ts`: bio, research directions, courses, and supervision data.
+- `src/data/profile.ts`: bio, courses, and supervision data.
+- `src/data/research.ts`: research groups and the shared software topic taxonomy.
 - `src/content/projects/`: project cards and GitHub links.
 - `src/content/publications/`: publication entries.
 - `src/content/grants/`: grant entries.
@@ -69,7 +70,11 @@ Settings -> Pages -> Build and deployment -> Source -> GitHub Actions
 
 ## Common Updates
 
-- Update research directions: edit `src/data/profile.ts`.
+- Update research groups and software topics: edit `src/data/research.ts`.
+- Choose homepage publications: set `featured: true` in the publication entries; selected papers are grouped by year.
+- The homepage keeps the original academic layout and uses native expandable
+  sections for additional software and the complete paper list. `/cv/` provides a printable CV; `/projects/`
+  remains available as a direct software index.
 - Add or revise a project: edit `src/content/projects/*.md`.
 - Add project images: put files under `public/images/projects/` and reference them from the project markdown.
 - Update publications: edit `src/content/publications/*.md`.

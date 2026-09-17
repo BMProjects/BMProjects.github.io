@@ -6,5 +6,4 @@ year: 2024
 type: journal
 doi: "10.1016/j.jobe.2024.110726"
 correspondingAuthors: ["Ke, Yan"]
-featured: true
 ---

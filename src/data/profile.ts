@@ -1,77 +1,11 @@
-export const researchDirections = [
-  {
-    key: 'medical-metrology',
-    title: 'Medical and Optical Metrology',
-    summary:
-      'Ophthalmic lenses, OCT images, microscopy data, and atomic-resolution images converted into repeatable measurement workflows.',
-    projects: ['DM_Scan', 'Microlens_DF', 'OCT_LatRes', 'STEM_atomap_GUI'],
-    grants: [
-      'National Key R&D Program: defocus microstructure lens wear detection and key-parameter assessment',
-    ],
-    courses: ['Digital Image Processing'],
-    evidence: [
-      'Dark-field lens-wear dataset, defect detection and scoring workflow',
-      'OCT B-scan lateral-resolution and contact-lens measurement tools',
-      'STEM atomic-position GUI for displacement and strain visualisation',
-    ],
-  },
-  {
-    key: 'hci-vision',
-    title: 'Human-Computer Interaction and Visual Recognition',
-    summary:
-      'Eye tracking, visual similarity, pose analysis, and interaction devices that turn perception signals into usable interfaces.',
-    projects: ['BadmintonCoach', 'SoccerCoach', 'DanceBattle', 'WaveGazeZoo', 'WDMPA-Net', 'Fashion Similarity Detection Tool'],
-    grants: [
-      'Zhejiang Natural Science Foundation: conjunctival vascular layering and eye tracking',
-      'National Key R&D Program: trademark and product similarity evidence collection',
-    ],
-    courses: ['Applied Human-Computer Interaction'],
-    evidence: [
-      'Authorised invention patent CN115984952B for conjunctival vascular image-based eye tracking',
-      'Pose-estimation workflow for dance movement comparison',
-      'Gaze-estimation, gaze-target, and HRI diagnostics experiments in WaveGazeZoo',
-      'Compact wavelet-attention gaze-estimation model with deployment benchmarking in WDMPA-Net',
-    ],
-  },
-  {
-    key: 'green-ml',
-    title: 'Machine Learning for Energy, Environment, and Quality Systems',
-    summary:
-      'Solar irradiance, building energy, carbon emissions, PM2.5, equipment diagnosis, and maintenance planning.',
-    projects: ['IntelligentMaintenancePlanning', 'CMamba-AAE', 'DMGENet'],
-    grants: [],
-    courses: ['Computer Frontier Topics'],
-    evidence: [
-      'Solar irradiance and building-energy forecasting with LSTM, reinforcement learning, and generative models',
-      'Chiller fault diagnosis under limited-sample conditions',
-      'Reinforcement-learning-based dynamic multi-graph ensemble for multi-station air-quality prediction',
-    ],
-  },
-  {
-    key: 'cs-education',
-    title: 'Large Language Model Applications',
-    summary:
-      'LLM-assisted grading, local-LLM automation pipelines, developer tooling, and course laboratories across systems, programming, HCI, and image processing.',
-    projects: ['LLM-AutoGrader', 'AcadBridge', 'cswap-gui'],
-    grants: [],
-    courses: [
-      'Computer Organization and Design',
-      'C Programming',
-      'Python Programming',
-      'Applied Human-Computer Interaction',
-    ],
-    evidence: [
-      'LLM-assistant-driven flexible course grading: conversational import planning, streaming comparative rubric grading, and gradebook curve adjustment with CSV and annotated-PDF export',
-      'Supervised 19 MSc students, including 13 graduated students and 6 students currently in training in 2026',
-      'Class adviser for the 2024 full-time MSc cohort in Computer Science and Technology, 69 students',
-      'Project-style supervision across OCT measurement, fashion similarity, pose analysis, and image segmentation',
-    ],
-  },
-] as const;
-
 export const bioTimeline = [
   {
+    period: '2018 –',
+    text: 'Lecturer in Computer Science at China Jiliang University.',
+  },
+  {
     period: '2024 –',
+    showOnHomepage: false,
     text: 'Class adviser for the 2024 full-time MSc cohort in Computer Science and Technology at China Jiliang University.',
   },
   {
@@ -81,10 +15,6 @@ export const bioTimeline = [
   {
     period: '2021 – 2022',
     text: 'Research assistant at the National Institute of Metrology, working on ophthalmic optical measurement and OCT-related algorithms.',
-  },
-  {
-    period: '2018 –',
-    text: 'Lecturer in Computer Science at China Jiliang University.',
   },
   {
     period: '2016 – 2018',

@@ -1,10 +1,11 @@
 ---
 name: Microlens_DF
 repo: https://github.com/BMProjects/Microlens_DF
-description: Dark-field defect detection, pixel-level analysis, WearScore grading, and a graphical workbench for defocus microstructure lens inspection.
-area: biomedical
+description: Dark-field lens inspection with defect analysis, wear scoring and a graphical workbench.
+area: optical-metrology
 tags: [Optics, Defect Detection, Wear Grading]
 language: Python
 image: /images/projects/microlens-df-gui.webp
-order: 12
+imageCaption: "Interface preview, no lens loaded."
+order: 2
 ---

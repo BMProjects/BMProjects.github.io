@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { RESEARCH_AREAS } from '../data/research';
 
 const publications = defineCollection({
   type: 'content',
@@ -16,7 +17,7 @@ const publications = defineCollection({
   }),
 });
 
-export const RESEARCH_AREAS = ['hci', 'biomedical', 'green-ml', 'metrology'] as const;
+export { RESEARCH_AREAS };
 export type ResearchArea = typeof RESEARCH_AREAS[number];
 
 const projects = defineCollection({
@@ -29,6 +30,7 @@ const projects = defineCollection({
     tags: z.array(z.string()).default([]),
     language: z.string().optional(),
     image: z.string().optional(),
+    imageCaption: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(99),
   }),
@@ -40,7 +42,7 @@ const grants = defineCollection({
     title: z.string(),
     funder: z.string(),
     amount: z.string(),
-    role: z.string().default('Co-PI'),
+    role: z.string(),
     status: z.string().optional(),
     description: z.string().optional(),
     start: z.string(),
