@@ -72,9 +72,10 @@ Settings -> Pages -> Build and deployment -> Source -> GitHub Actions
 
 - Update research groups and software topics: edit `src/data/research.ts`.
 - Choose homepage publications: set `featured: true` in the publication entries; selected papers are grouped by year.
-- The homepage keeps the original academic layout and uses native expandable
-  sections for additional software and the complete paper list. `/cv/` provides a printable CV; `/projects/`
-  remains available as a direct software index.
+- The homepage keeps the original academic layout. All four software groups are
+  shown directly; only the complete paper list stays in a native expandable
+  section. `/cv/` provides a printable CV; `/projects/` remains available as a
+  direct software index.
 - Add or revise a project: edit `src/content/projects/*.md`.
 - Add project images: put files under `public/images/projects/` and reference them from the project markdown.
 - Update publications: edit `src/content/publications/*.md`.

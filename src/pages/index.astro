@@ -97,22 +97,14 @@ const grants = (await getCollection('grants')).sort(
   <section id="research" class="bg-sky-50/60 dark:bg-sky-950/20 border-y border-sky-100 dark:border-sky-950/40">
     <div class="container-wide py-12 md:py-16">
       <SectionHeading kicker="Research" title="Research and Software" />
-      {researchDirections.filter((area) => area.primary).map((area) => (
+      {researchDirections.map((area) => (
         <ProjectGroup
           title={area.title}
           summary={area.summary}
           projects={allProjects.filter((project) => project.data.area === area.key)}
         />
       ))}
-      <details id="other-software" class="mt-8 border-t border-sky-200 dark:border-sky-900 pt-5">
-        <summary class="cursor-pointer text-sm font-medium text-accent dark:text-accent-d py-2">LLM applications (4 projects)</summary>
-        <div class="mt-6">
-          {researchDirections.filter((area) => !area.primary).map((area) => (
-            <ProjectGroup title={area.title} summary={area.summary} projects={allProjects.filter((project) => project.data.area === area.key)} />
-          ))}
-          <p class="text-sm text-stone-600 dark:text-stone-400 leading-relaxed">A related industry-facing project, Fashion Similarity Detection Tool, supports clothing detection and visual similarity retrieval from e-commerce screenshots.</p>
-        </div>
-      </details>
+      <p class="mt-8 border-t border-sky-200 dark:border-sky-900 pt-5 text-sm text-stone-600 dark:text-stone-400 leading-relaxed">A related industry-facing project, Fashion Similarity Detection Tool, supports clothing detection and visual similarity retrieval from e-commerce screenshots.</p>
     </div>
   </section>
 
